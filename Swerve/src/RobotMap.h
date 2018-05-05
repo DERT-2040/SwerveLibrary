@@ -5,7 +5,7 @@
 
 
 #include "WPILib.h"
-#include "SwerveModule.h"
+#include "AnalogPotentiometer.h"
 #include "C:\Users\Carter DiOrio\Documents\Talon\include\ctre\Phoenix.h"
 
 class RobotMap {
@@ -23,13 +23,13 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> BLDriveMotor;
 	static std::shared_ptr<WPI_TalonSRX> BLRotationMotor;
 
-	static std::shared_ptr<AnalogInput> FRAbsEncoder;
+	static std::shared_ptr<AnalogPotentiometer> FRAbsEncoder;
 
-	static std::shared_ptr<AnalogInput> FLAbsEncoder;
+	static std::shared_ptr<AnalogPotentiometer> FLAbsEncoder;
 
-	static std::shared_ptr<AnalogInput> BRAbsEncoder;
+	static std::shared_ptr<AnalogPotentiometer> BRAbsEncoder;
 
-	static std::shared_ptr<AnalogInput> BLAbsEncoder;
+	static std::shared_ptr<AnalogPotentiometer> BLAbsEncoder;
 
 	static void init();
 };

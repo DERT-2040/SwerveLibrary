@@ -1,25 +1,25 @@
-/*
- * SwerveModule.cpp
- *
- *  Created on: May 2, 2018
- *      Author: Carter DiOrio
- */
+
 
 #include "SwerveModule.h"
 
-SwerveModule::SwerveModule(std::shared_ptr<AnalogInput> absE , std::shared_ptr<WPI_TalonSRX> rMotor) {
+SwerveModule::SwerveModule(std::shared_ptr<AnalogPotentiometer> absE , std::shared_ptr<WPI_TalonSRX> rMotor)
+{
 
 	absEncoder = absE;
 	rotationMotor = rMotor;
 
+	rotationPID = new PIDController(0.001 , 0.0, 0.0 , 0.0, absEncoder.get() , rotationMotor.get() , .01);
+	rotationPID->SetContinuous(true);
+	rotationPID->Enable();
 }
 
-double SwerveModule::getDegrees()
+void SwerveModule::setRotationPosition(double degrees)
 {
-	return absEncoder->GetVoltage()*72;
+	rotationPID->SetSetpoint(degrees);
 }
 
-SwerveModule::~SwerveModule() {
-	// TODO Auto-generated destructor stub
+SwerveModule::~SwerveModule()
+{
+
 }
 
