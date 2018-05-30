@@ -65,7 +65,12 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 
-	SWERVEDRIVE->drive(oi->joystick1->GetX() , oi->joystick2->GetX() , oi->joystick2->GetY());
+	SWERVEDRIVE->drive(oi->joystick1->GetX() , oi->joystick2->GetY()*-1 , oi->joystick2->GetX()*-1);
+	SmartDashboard::PutString("DB/String 0",std::to_string(SWERVEDRIVE->getModule(1).getEncoderValue()));
+	SmartDashboard::PutString("DB/String 1",std::to_string(SWERVEDRIVE->getModule(2).getEncoderValue()));
+	SmartDashboard::PutString("DB/String 2",std::to_string(SWERVEDRIVE->getModule(3).getEncoderValue()));
+	SmartDashboard::PutString("DB/String 3",std::to_string(SWERVEDRIVE->getModule(4).getEncoderValue()));
+
 	frc::Scheduler::GetInstance()->Run();
 }
 

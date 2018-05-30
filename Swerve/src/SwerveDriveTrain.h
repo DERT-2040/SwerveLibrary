@@ -21,6 +21,7 @@ public:
 					,double WB , double TW);
 
 	void drive(double xValJoy1 , double xValJoy2 , double yValJoy2);
+	SwerveModule getModule(int num);
 
 private:
 

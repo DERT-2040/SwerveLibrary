@@ -29,10 +29,12 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 	C = 0;
 	D = 0;
 
-	FLPosition = 0;
-	FRPosition = 0;
-	BLPosition = 0;
-	BRPosition = 0;
+	double temp = 0;
+
+	FLPosition = temp;
+	FRPosition = temp;
+	BLPosition = temp;
+	BRPosition = temp;
 
 	wheelbase = WB;
 	trackwidth = TW;
@@ -43,6 +45,11 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 	BL = new SwerveModule(BLAbsEncoder , BLRotation);
 	BR = new SwerveModule(BRAbsEncoder , BRRotation);
 
+	FL->setRotationOffSet(145);
+	FR->setRotationOffSet(330);
+	BR->setRotationOffSet(232.5);
+	BL->setRotationOffSet(305);
+
 	FL->setRotationPosition(FLPosition);
 	FR->setRotationPosition(FRPosition);
 	BL->setRotationPosition(BLPosition);
@@ -52,8 +59,16 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 
 void SwerveDriveTrain::drive(double xValJoy1 , double xValJoy2 , double yValJoy2)
 {
-
-	radiansPerSecond = xValJoy1 * maxRotationSpeedMultiplier;
+	if(xValJoy1 < 0.1 && xValJoy1 > -0.1){
+		xValJoy1 = 0;
+	}
+	if(xValJoy2 < 0.1 && xValJoy2 > -0.1){
+		xValJoy2 = 0;
+		}
+	if(yValJoy2 < 0.1 && yValJoy2 > -0.1){
+		yValJoy2 = 0;
+		}
+	radiansPerSecond = xValJoy1 * maxRotationSpeedMultiplier/5;
 
 	A = xValJoy2 - radiansPerSecond*(wheelbase/2);
 	B = xValJoy2 + radiansPerSecond*(wheelbase/2);
@@ -70,5 +85,25 @@ void SwerveDriveTrain::drive(double xValJoy1 , double xValJoy2 , double yValJoy2
 	BL->setRotationPosition(BLPosition);
 	BR->setRotationPosition(BRPosition);
 
+}
+
+SwerveModule SwerveDriveTrain::getModule(int num)
+{
+	if(num == 1)
+	{
+		return *FL;
+	}
+	else if(num == 2)
+	{
+		return *FR;
+	}
+	else if(num == 3)
+	{
+		return *BL;
+	}
+	else
+	{
+		return *BR;
+	}
 }
 

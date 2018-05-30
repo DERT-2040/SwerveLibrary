@@ -6,7 +6,7 @@
 
 #include "WPILib.h"
 #include "AnalogPotentiometer.h"
-#include "C:\Users\Carter DiOrio\Documents\Talon\include\ctre\Phoenix.h"
+#include "ctre\Phoenix.h"
 
 class RobotMap {
 public:
@@ -30,6 +30,7 @@ public:
 	static std::shared_ptr<AnalogPotentiometer> BRAbsEncoder;
 
 	static std::shared_ptr<AnalogPotentiometer> BLAbsEncoder;
+
 
 	static void init();
 };
