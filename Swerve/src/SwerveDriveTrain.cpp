@@ -45,10 +45,10 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 	BL = new SwerveModule(BLAbsEncoder , BLRotation);
 	BR = new SwerveModule(BRAbsEncoder , BRRotation);
 
-	FL->setRotationOffSet(145);
-	FR->setRotationOffSet(330);
-	BR->setRotationOffSet(232.5);
-	BL->setRotationOffSet(305);
+	FL->setRotationOffSet(330);
+	FR->setRotationOffSet(325);
+	BR->setRotationOffSet(305);
+	BL->setRotationOffSet(232.5);
 
 	FL->setRotationPosition(FLPosition);
 	FR->setRotationPosition(FRPosition);
