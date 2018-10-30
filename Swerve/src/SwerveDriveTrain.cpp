@@ -7,22 +7,9 @@
 
 #include "SwerveDriveTrain.h"
 
-SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::shared_ptr<WPI_TalonSRX> FRR
-								  ,std::shared_ptr<WPI_TalonSRX> BLR,std::shared_ptr<WPI_TalonSRX> BRR
-								  ,std::shared_ptr<AnalogPotentiometer> FLAbs, std::shared_ptr<AnalogPotentiometer> FRAbs
-								  ,std::shared_ptr<AnalogPotentiometer> BLAbs, std::shared_ptr<AnalogPotentiometer> BRAbs,
-								  double WB,  double TW)
+SwerveDriveTrain::SwerveDriveTrain(struct swerve_drive)
 {
 
-	FLRotation = FLR;
-	FRRotation = FRR;
-	BLRotation = BLR;
-	BRRotation = BRR;
-
-	FLAbsEncoder = FLAbs;
-	FRAbsEncoder = FRAbs;
-	BLAbsEncoder = BLAbs;
-	BRAbsEncoder = BRAbs;
 
 	A = 0;
 	B = 0;
@@ -45,10 +32,11 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 	BL = new SwerveModule(BLAbsEncoder , BLRotation);
 	BR = new SwerveModule(BRAbsEncoder , BRRotation);
 
-	FL->setRotationOffSet(330);
-	FR->setRotationOffSet(325);
-	BR->setRotationOffSet(305);
-	BL->setRotationOffSet(232.5);
+	//set rotation offset for each module
+	FL->setRotationOffSet(0);
+	FR->setRotationOffSet(0);
+	BR->setRotationOffSet(0);
+	BL->setRotationOffSet(0);
 
 	FL->setRotationPosition(FLPosition);
 	FR->setRotationPosition(FRPosition);
@@ -59,15 +47,21 @@ SwerveDriveTrain::SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR, std::share
 
 void SwerveDriveTrain::drive(double xValJoy1 , double xValJoy2 , double yValJoy2)
 {
-	if(xValJoy1 < 0.1 && xValJoy1 > -0.1){
+	if(xValJoy1 < 0.1 && xValJoy1 > -0.1)
+	{
 		xValJoy1 = 0;
 	}
-	if(xValJoy2 < 0.1 && xValJoy2 > -0.1){
+
+	if(xValJoy2 < 0.1 && xValJoy2 > -0.1)
+	{
 		xValJoy2 = 0;
-		}
-	if(yValJoy2 < 0.1 && yValJoy2 > -0.1){
+	}
+
+	if(yValJoy2 < 0.1 && yValJoy2 > -0.1)
+	{
 		yValJoy2 = 0;
-		}
+	}
+
 	radiansPerSecond = xValJoy1 * maxRotationSpeedMultiplier/5;
 
 	A = xValJoy2 - radiansPerSecond*(wheelbase/2);

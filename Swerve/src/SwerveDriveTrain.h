@@ -14,11 +14,7 @@ class SwerveDriveTrain {
 
 public:
 
-	SwerveDriveTrain(std::shared_ptr<WPI_TalonSRX> FLR,  std::shared_ptr<WPI_TalonSRX> FRR
-					,std::shared_ptr<WPI_TalonSRX> BLR,  std::shared_ptr<WPI_TalonSRX> BRR
-					,std::shared_ptr<AnalogPotentiometer> FLAbs, std::shared_ptr<AnalogPotentiometer> FRAbs
-					,std::shared_ptr<AnalogPotentiometer> BLAbs, std::shared_ptr<AnalogPotentiometer> BRAbs
-					,double WB , double TW);
+	SwerveDriveTrain(struct swerve_drive);
 
 	void drive(double xValJoy1 , double xValJoy2 , double yValJoy2);
 	SwerveModule getModule(int num);
