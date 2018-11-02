@@ -1,7 +1,6 @@
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
 
-
 std::shared_ptr<WPI_TalonSRX> RobotMap::FLDrive;
 std::shared_ptr<WPI_TalonSRX> RobotMap::FLRotation;
 std::shared_ptr<AnalogPotentiometer> RobotMap::FLrotationEncoder;
