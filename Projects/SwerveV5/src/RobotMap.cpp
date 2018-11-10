@@ -23,28 +23,21 @@ void RobotMap::init() {
 
     FLDrive.reset(new WPI_TalonSRX(9));
     FLRotation.reset(new WPI_TalonSRX(5));
-    FLrotationEncoder.reset(new AnalogPotentiometer(0, 360, 0));
-
-    //FLRotation->SetInverted(true);
+    FLrotationEncoder.reset(new AnalogPotentiometer(0, 360, -180));
 
     FRDrive.reset(new WPI_TalonSRX(8));
     FRRotation.reset(new WPI_TalonSRX(7));
-    FRrotationEncoder.reset(new AnalogPotentiometer(1, 360, 0));
-
-    FRDrive->SetInverted(true);
-
+    FRrotationEncoder.reset(new AnalogPotentiometer(1, 360, -180));
     FRRotation->SetInverted(true);
+
 
     BLDrive.reset(new WPI_TalonSRX(6));
     BLRotation.reset(new WPI_TalonSRX(1));
-    BLrotationEncoder.reset(new AnalogPotentiometer(2, 360, 0));
-
+    BLrotationEncoder.reset(new AnalogPotentiometer(2, 360, -180));
     BLRotation->SetInverted(true);
 
     BRDrive.reset(new WPI_TalonSRX(2));
     BRRotation.reset(new WPI_TalonSRX(3));
-    BRrotationEncoder.reset(new AnalogPotentiometer(3, 360, 0));
-
+    BRrotationEncoder.reset(new AnalogPotentiometer(3, 360, -180));
     BRRotation->SetInverted(true);
-    BRDrive->SetInverted(true);
 }

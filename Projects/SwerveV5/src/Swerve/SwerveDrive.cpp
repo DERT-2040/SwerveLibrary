@@ -7,7 +7,7 @@
 
 #include "SwerveDrive.h"
 #include "../RobotMap.h"
-
+#include "WPILib.h"
 SwerveDrive::SwerveDrive()
 {
 	FL = new SwerveModule(RobotMap::FLrotationEncoder, RobotMap::FLDrive, RobotMap::FLRotation);
@@ -28,6 +28,10 @@ SwerveDrive::SwerveDrive()
 void SwerveDrive::drive(double robotX, double robotY, double omega)
 {
 	int highest = 0;
+	SmartDashboard::PutString("DB/String 7", std::to_string(robotY));
+
+	robotX = robotX*-1;
+	robotY = robotY*-1;
 
 	A = robotX + omega*wheelBase/2;
 	B = robotX - omega*wheelBase/2;
@@ -65,15 +69,20 @@ void SwerveDrive::drive(double robotX, double robotY, double omega)
 		}
 	}
 
+
 	FL->setAngle(wheelAngle[1]);
 	FR->setAngle(wheelAngle[0]);
-	BL->setAngle(wheelAngle[2]);
-	BR->setAngle(wheelAngle[3]);
+	BL->setAngle(wheelAngle[3]);
+	BR->setAngle(wheelAngle[2]);
+	SmartDashboard::PutString("DB/String 8", std::to_string(wheelAngle[1]));
+	SmartDashboard::PutString("DB/String 9", std::to_string(wheelAngle[2]));
 
-	FL->setSpeed(wheelSpeed[0]*.25);
-	FR->setSpeed(wheelSpeed[1]*.25);
-	BL->setSpeed(wheelSpeed[2]*.25);
-	BR->setSpeed(wheelSpeed[3]*.25);
+
+	FL->setSpeed(wheelSpeed[0]*.35);
+	FR->setSpeed(wheelSpeed[1]*.35);
+	BL->setSpeed(wheelSpeed[2]*.35);
+	BR->setSpeed(wheelSpeed[3]*.35);
+
 
 }
 

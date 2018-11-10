@@ -14,10 +14,10 @@ SwerveModule::SwerveModule(std::shared_ptr<AnalogPotentiometer> _rotationEncoder
 	rotationMotor = _rotationMotor;
 	rotationEncoder = _rotationEncoder;
 
-	rotationPID = new PIDController(0.03, 0.0, 0.001, 0.0, rotationEncoder.get(), rotationMotor.get(), .01);
+	rotationPID = new PIDController(0.06, 0.0, 0.001, 0.0, rotationEncoder.get(), rotationMotor.get(), .01);
+	rotationPID->SetInputRange(-180 , 180);
 	rotationPID->SetContinuous(true);
-	rotationPID->SetInputRange(0.0 , 360.0);
-	rotationPID->SetOutputRange(-.5, .5);
+	rotationPID->SetOutputRange(-.50, .50);
 	rotationPID->SetEnabled(true);
 
 	angle = 0;
@@ -33,7 +33,8 @@ void SwerveModule::setSpeed(double speed)
 void SwerveModule::setAngle(double _angle)
 {
 	angle = _angle + offset;
-	if(angle > 360) angle -= 360;
+	if(angle > 180) angle -= 360;
+	if(angle < -180) angle += 360;
 	rotationPID->SetSetpoint(angle);
 }
 

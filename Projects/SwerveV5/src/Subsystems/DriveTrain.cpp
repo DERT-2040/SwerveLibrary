@@ -11,14 +11,17 @@ DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain")
 	swerve->getModule(2).setOffset(180);
 	*/
 
-	swerve->FR->setOffset(120);
+	swerve->FL->setOffset(-135);
+	swerve->FL->setAngle(0);
+
+	swerve->FR->setOffset(-64);
 	swerve->FR->setAngle(0);
 
-	swerve->BR->setOffset(247);
-	swerve->BR->setAngle(0);
+	swerve->BL->setOffset(-42);
+	swerve->BL->setAngle(0);
 
-	swerve->FL->setOffset(209);
-	swerve->FL->setAngle(0);
+	swerve->BR->setOffset(75);
+	swerve->BR->setAngle(0);
 }
 
 void DriveTrain::InitDefaultCommand()
@@ -35,13 +38,6 @@ void DriveTrain::Periodic()
 
 	//angleT = SmartDashboard::GetNumber("DB/String 5", 0);
 
-	/*
-	swerve->FL->setAngle(angleT);
-	swerve->FR->setAngle(angleT);
-	angleT++;
-	if(angleT > 360) angleT = 0;
-	*/
-
 
 }
 
@@ -50,11 +46,16 @@ void DriveTrain::drive(Joystick *left, Joystick *right)
 	/*
 	swerve->FL->setAngle(angleT);
 	swerve->FR->setAngle(angleT);
+	swerve->BL->setAngle(angleT);
+	swerve->BR->setAngle(angleT);
+	if(angleT >= 360) angleT = 0;
 	angleT++;
-	if(angleT > 360) angleT = 0;
 	*/
-	swerve->drive(right->GetX()*-1, right->GetY()*-1, left->GetX());
-	//swerve->drive(left->GetRawAxis(0), left->GetRawAxis(1), left->GetRawAxis(4));
+	//swerve->drive(right->GetX()*-1, right->GetY()*-1, left->GetX());
+	swerve->drive(left->GetRawAxis(4), left->GetRawAxis(5), left->GetRawAxis(0));
+	SmartDashboard::PutString("DB/String 5", std::to_string(left->GetRawAxis(4)));
+	SmartDashboard::PutString("DB/String 6", std::to_string(left->GetRawAxis(5)));
+
 }
 
 
